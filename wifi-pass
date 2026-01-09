@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+"""wifi-pass: Show saved wifi passwords (macOS)."""
+
+import subprocess
+import sys
+
+
+def get_saved_networks():
+    """Get list of saved wifi networks."""
+    result = subprocess.run(
+        ["networksetup", "-listpreferredwirelessnetworks", "en0"],
+        capture_output=True, text=True
+    )
+    lines = result.stdout.strip().split("\n")[1:]  # Skip header
+    return [line.strip() for line in lines if line.strip()]
+
+
+def get_password(ssid):
+    """Get password for a specific network."""
+    result = subprocess.run(
+        ["security", "find-generic-password", "-wa", ssid],
+        capture_output=True, text=True
+    )
+    return result.stdout.strip() if result.returncode == 0 else None
+
+
+def main():
+    if sys.platform != "darwin":
+        print("macOS only, sorry!")
+        return
+
+    if len(sys.argv) > 1:
+        # Get specific network
+        ssid = " ".join(sys.argv[1:])
+        pwd = get_password(ssid)
+        if pwd:
+            print(f"\033[1m{ssid}\033[0m: {pwd}")
+        else:
+            print(f"No password found for '{ssid}'")
+        return
+
+    # List all
+    networks = get_saved_networks()
+    if not networks:
+        print("No saved networks found.")
+        return
+
+    print(f"Found {len(networks)} networks:\n")
+    for ssid in networks[:10]:  # Limit to 10
+        pwd = get_password(ssid)
+        if pwd:
+            print(f"\033[1m{ssid}\033[0m: {pwd}")
+        else:
+            print(f"\033[1m{ssid}\033[0m: (no password / auth required)")
+
+
+if __name__ == "__main__":
+    main()
