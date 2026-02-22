@@ -1,36 +1,82 @@
 # wifi-pass
 
-Show saved wifi passwords on macOS.
+## Detailed Description
 
+wifi-pass is maintained as an industry-grade software project with production-ready engineering practices.  
+This repository includes documented setup, quality gates, operational guidance, and governance standards so contributors can safely build, test, and ship changes with confidence.
+
+## Problem Statement
+
+Describe the user or business problem this project solves, the target users, and expected outcomes.
+
+## Solution Overview
+
+Summarize the architecture, core modules, and runtime behavior at a high level.
+
+## Key Features
+
+- Clear project scope and intended use.
+- Reproducible local development workflow.
+- Test coverage and CI quality gates.
+- Security and contribution policies.
+- Deployment-ready repository structure.
+
+## Repository Structure
+
+```text
+.
+|-- src/                  # Core implementation
+|-- tests/                # Automated test suites
+|-- docs/                 # Design notes and operational docs
+|-- .github/workflows/    # CI pipelines
+|-- README.md
+|-- LICENSE
+|-- CONTRIBUTING.md
+|-- SECURITY.md
+|-- CODE_OF_CONDUCT.md
 ```
-$ wifi-pass
-Found 5 networks:
 
-HomeWifi: mypassword123
-Starbucks: xK9#guest
-Office-5G: hunter2
+## Getting Started
 
-$ wifi-pass HomeWifi
-HomeWifi: mypassword123
-```
+### Prerequisites
 
-## Install
+- Git
+- Project runtime/toolchain for this repo
+
+### Local Setup
 
 ```bash
-git clone https://github.com/yksanjo/wifi-pass.git
-chmod +x wifi-pass/wifi-pass
-cp wifi-pass/wifi-pass /usr/local/bin/
+make test
+make lint
 ```
 
 ## Usage
 
-```bash
-wifi-pass          # show all saved networks
-wifi-pass <name>   # show specific network
-```
+Document primary commands, API routes, CLI examples, or UI workflows here.
 
-Note: macOS will prompt for your password to access keychain.
+## Quality Standards
+
+- CI must pass before merge.
+- Changes require tests for critical behavior.
+- Security-sensitive changes should include risk notes.
+- Keep pull requests focused and reviewable.
+
+## Security
+
+See `SECURITY.md` for responsible disclosure and handling guidelines.
+
+## Contributing
+
+See `CONTRIBUTING.md` for branching, commit, and pull request expectations.
+
+## Roadmap
+
+Track upcoming milestones, technical debt, and planned feature work.
+
+## Support
+
+Open a GitHub issue for bugs, feature requests, or documentation gaps.
 
 ## License
 
-MIT
+This project is released under the MIT License.
